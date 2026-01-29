@@ -23,9 +23,6 @@ export default function ProductGridItems({
         const isSoldOut =
           !product.availableForSale ||
           (product.totalInventory !== null && product.totalInventory <= 0);
-        console.log(
-          `Product: ${product.title}, Available: ${product.availableForSale}, Total Inventory: ${product.totalInventory}, Is Sold Out: ${isSoldOut}`
-        );
 
         return (
           <Grid.Item key={product.handle} className="animate-fadeIn">
