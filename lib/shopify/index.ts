@@ -443,7 +443,13 @@ export async function getProducts({
 
 // This is called from `app/api/revalidate.ts` so providers can control revalidation logic.
 export async function revalidate(req: NextRequest): Promise<NextResponse> {
-  const collectionWebhooks = ['collections/create', 'collections/delete', 'collections/update'];
+  const collectionWebhooks = [
+    'collections/create',
+    'collections/delete',
+    'collections/update',
+    'inventory_levels/update', // Add this!
+    'inventory_items/update'
+  ];
   const productWebhooks = ['products/create', 'products/delete', 'products/update'];
 
   // Await headers for Next.js 16 compatibility
@@ -479,6 +485,8 @@ export async function revalidate(req: NextRequest): Promise<NextResponse> {
 
   if (isProductUpdate) {
     revalidateTag(TAGS.products as string, 'default');
+    // If your product grid relies on collection data, clear that too
+    revalidateTag(TAGS.collections as string, 'default');
   }
 
   // 4. THE FIX: Final return statement to satisfy TypeScript
