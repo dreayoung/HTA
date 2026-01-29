@@ -13,7 +13,7 @@ export default function ProductGridItems({
   products: Product[];
   collection: string;
 }) {
-  // console.log('Rendering ProductGridItems with products:', products);
+  console.log('Rendering ProductGridItems with products:', products);
 
   return (
     <>
@@ -25,7 +25,7 @@ export default function ProductGridItems({
         return (
           <Grid.Item key={product.handle} className="animate-fadeIn">
             <Link className="relative h-full w-full" href={`/${collection}/${product.handle}`}>
-              {!product.availableForSale ? (
+              {!isSoldOut ? (
                 <span className="absolute inset-2 z-50 h-fit w-fit whitespace-nowrap rounded-full border-black bg-black/65 p-1 px-2 text-[8.5px] text-zinc-100 backdrop-blur-xl">
                   Sold Out
                 </span>
